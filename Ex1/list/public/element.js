@@ -11,8 +11,11 @@ const Element = {
          @blur="modify($event)" 
                       ref="refInput" />
         <button @click="remove()"> Remove </button> 
-        <button @click="input=true"> Modify </button>
-        <button @click="input=true"> Date Planned </button> 
+        <button @click="input=true"> Enter Task </button>
+        <button @click="input=true"> Assign Date </button> 
+        <input v-else type="text" :value="dateA.text" 
+         @blur="dateA($event)"
+                      ref="refInput" />
         <button @click="input=true"> Task Completed </button>
       </li>
     `,
@@ -27,9 +30,15 @@ const Element = {
         this.input = false;
         this.$emit("modify", { id : this.element._id, value : 
         value });
+      },
+      dateA(event) {
+        var value = event.target.value;
+        this.input = false;
+        this.$emit("insertDate", { id : this.element._id, value : 
+        value });
       }
     },
-    emits : ["remove", "modify"],
+    emits : ["remove", "modify", "insertDate"],
     updated() {
       // check that refInput exists, and if so, give focus to the input field
       if (this.$refs.refInput) this.$refs.refInput.focus();  
