@@ -9,7 +9,7 @@ const GlobalApp = {
     Element:Element
   },
   template : `
-    <button @click="add()">Add Element</button>
+    <button @click="add()">Add Task</button>
     <ul>
       <Element v-for="(element, index) in elements" 
        :key="index" :element="element"
@@ -19,7 +19,7 @@ const GlobalApp = {
   `,
   methods : {
     add() {
-      var text = "Element " + (this.elements.length + 1);
+      var text = "Task " + (this.elements.length + 1);
       axios.post("/list", {text:text})     // pass object {text:text} to server
       .then((response) => {
         this.elements.push({text:text, 
